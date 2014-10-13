@@ -1,6 +1,7 @@
 var through = require('through2')
-  , insertCss = require('insert-css')
-  , css = fs.readFileSync(__dirname + '/index.css')
+var insertCss = require('insert-css')
+var fs = require('fs')
+var css = fs.readFileSync(__dirname + '/index.css')
 
 var re = {
     ok: new RegExp([

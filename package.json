@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/**.*",
-    "bundle":"browserify -r tape -r ./index.js:browserify-tape-spec -t brfs > test/bundle.js"
+    "bundle":"browserify -r tape -r ./index.js:browserify-tape-spec > test/bundle.js"
+  },
+  "browserify":{
+      "transform": [ "brfs" ]
   },
   "repository": {
     "type": "git",
