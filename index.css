@@ -1,0 +1,38 @@
+.ok {
+  display:block;
+  color:green;
+}
+
+.ok:before {
+  content: "\2611";
+  padding:10px 10px 0 0;
+}
+
+.ok:hover, .fail:hover {
+  background:#333;
+  cursor:pointer;
+}
+
+.fail{
+  display:block;
+  color:red;
+}
+
+.fail:before {
+  content: "\2612";
+  padding:10px 10px 0 0;
+}
+
+.msg {
+  display:block;
+  margin-top:20px;
+  color:white;
+}
+
+body {
+  background:black;
+  margin-left:20px;
+  font-family: source-code-pro, sans-serif;
+  user-select:none;
+
+}

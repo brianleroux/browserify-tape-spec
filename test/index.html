@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>tape test runner for browserify</title>
+<script src="//use.edgefonts.net/source-code-pro.js"></script> 
+<script src=bundle.js></script>
+</head>
+<body>
+    
+    <div id=out></div>
+
+<script>
+var test = require('tape')
+  , report = require('browserify-tape-spec')
+
+test('the first test case', function(t) {
+  t.plan(1)
+  t.ok('help', 'a good test')
+  t.ok('help', 'another good test')
+  t.end()
+})
+
+test('second test is planning to fail', function(t) {
+  t.fail('no good')
+  t.end()
+})
+
+test.createStream().pipe(report('out'))
+</script>
+</body>
+</html>

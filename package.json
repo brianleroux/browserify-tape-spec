@@ -1,0 +1,32 @@
+{
+  "name": "browserify-tape-spec",
+  "version": "1.0.0",
+  "description": "Browser reporter for tape stream.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/**.*",
+    "bundle":"browserify -r tape -r ./index.js:browserify-tape-spec -t brfs > test/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/brianleroux/browserify-tape-spec"
+  },
+  "keywords": [
+    "tape",
+    "tap",
+    "browserify",
+    "browser",
+    "reporter"
+  ],
+  "author": "Brian LeRoux",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/brianleroux/browserify-tape-spec/issues"
+  },
+  "homepage": "https://github.com/brianleroux/browserify-tape-spec",
+  "dependencies": {
+    "brfs": "^1.2.0",
+    "insert-css": "^0.2.0",
+    "through2": "^0.6.3"
+  }
+}
