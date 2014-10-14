@@ -32,6 +32,18 @@ module.exports = function(output_element) {
     out.innerHTML +='<div class=ok>'+ txt +'</div>'
   }
   
+  function totalFail(txt) {
+    out.innerHTML +='<div class=total-fail>'+ txt +'</div>'
+  }
+
+  function totalOk(txt) {
+    out.innerHTML +='<div class=total-ok>'+ txt +'</div>'
+  }
+
+  function totalMsg(txt) {
+    out.innerHTML +='<div class=total-msg>'+ txt +'</div>'
+  }
+  
   
   return through(function(chunk, enc, cb) {
 
@@ -54,9 +66,9 @@ module.exports = function(output_element) {
       }
     }
     else if (line_msg) {
-      if (/^tests\s+[1-9]/gi.test(line_msg[1])) msg('total '+line_msg[1])
-      else if (/^pass\s+[1-9]/gi.test(line_msg[1])) ok(line_msg[1]);
-      else if (/^fail\s+[1-9]/gi.test(line_msg[1])) fail(line_msg[1]);
+      if (/^tests\s+[1-9]/gi.test(line_msg[1])) totalMsg('total ' + line_msg[1])
+      else if (/^pass\s+[1-9]/gi.test(line_msg[1])) totalOk(line_msg[1])
+      else if (/^fail\s+[1-9]/gi.test(line_msg[1])) totalFail(line_msg[1])
       else msg(line_msg[1])
     } 
     else if (line_plan) {

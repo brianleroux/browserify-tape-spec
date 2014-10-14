@@ -32,10 +32,23 @@
   color:white;
 }
 
+.total-msg {
+  display:block;
+  margin-top:20px;
+  color:white;
+}
+
+.total-fail {
+    color:red;
+}
+
+.total-ok {
+    color:green;
+}
+
 body {
   background:black;
   margin-left:20px;
   font-family: source-code-pro, sans-serif;
   user-select:none;
-
 }

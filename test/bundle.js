@@ -1,7 +1,7 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"1cvJX4":[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;var through = require('through2')
 var insertCss = require('insert-css')
-var css = Buffer("Lm9rIHsKICBkaXNwbGF5OmJsb2NrOwogIGNvbG9yOmdyZXk7Cn0KCi5vazpiZWZvcmUgewogIGNvbnRlbnQ6ICJcMjcxMyI7CiAgcGFkZGluZzoxMHB4IDEwcHggMCAyMHB4OwogIGNvbG9yOmdyZWVuOwp9Cgoub2s6aG92ZXIsIC5mYWlsOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiMzMzM7CiAgY3Vyc29yOnBvaW50ZXI7Cn0KCi5mYWlsIHsKICBkaXNwbGF5OmJsb2NrOwogIGNvbG9yOmdyZXk7Cn0KCi5mYWlsOmJlZm9yZSB7CiAgY29udGVudDogIlwyNzE3IjsKICBwYWRkaW5nOjEwcHggMTBweCAwIDIwcHg7CiAgY29sb3I6cmVkOwp9CgoubXNnIHsKICBkaXNwbGF5OmJsb2NrOwogIG1hcmdpbi10b3A6MjBweDsKICBtYXJnaW4tYm90dG9tOjEwcHg7CiAgY29sb3I6d2hpdGU7Cn0KCmJvZHkgewogIGJhY2tncm91bmQ6YmxhY2s7CiAgbWFyZ2luLWxlZnQ6MjBweDsKICBmb250LWZhbWlseTogc291cmNlLWNvZGUtcHJvLCBzYW5zLXNlcmlmOwogIHVzZXItc2VsZWN0Om5vbmU7Cgp9Cg==","base64")
+var css = Buffer("Lm9rIHsKICBkaXNwbGF5OmJsb2NrOwogIGNvbG9yOmdyZXk7Cn0KCi5vazpiZWZvcmUgewogIGNvbnRlbnQ6ICJcMjcxMyI7CiAgcGFkZGluZzoxMHB4IDEwcHggMCAyMHB4OwogIGNvbG9yOmdyZWVuOwp9Cgoub2s6aG92ZXIsIC5mYWlsOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiMzMzM7CiAgY3Vyc29yOnBvaW50ZXI7Cn0KCi5mYWlsIHsKICBkaXNwbGF5OmJsb2NrOwogIGNvbG9yOmdyZXk7Cn0KCi5mYWlsOmJlZm9yZSB7CiAgY29udGVudDogIlwyNzE3IjsKICBwYWRkaW5nOjEwcHggMTBweCAwIDIwcHg7CiAgY29sb3I6cmVkOwp9CgoubXNnIHsKICBkaXNwbGF5OmJsb2NrOwogIG1hcmdpbi10b3A6MjBweDsKICBtYXJnaW4tYm90dG9tOjEwcHg7CiAgY29sb3I6d2hpdGU7Cn0KCi50b3RhbC1tc2cgewogIGRpc3BsYXk6YmxvY2s7CiAgbWFyZ2luLXRvcDoyMHB4OwogIGNvbG9yOndoaXRlOwp9CgoudG90YWwtZmFpbCB7CiAgICBjb2xvcjpyZWQ7Cn0KCi50b3RhbC1vayB7CiAgICBjb2xvcjpncmVlbjsKfQoKYm9keSB7CiAgYmFja2dyb3VuZDpibGFjazsKICBtYXJnaW4tbGVmdDoyMHB4OwogIGZvbnQtZmFtaWx5OiBzb3VyY2UtY29kZS1wcm8sIHNhbnMtc2VyaWY7CiAgdXNlci1zZWxlY3Q6bm9uZTsKfQo=","base64")
 
 var re = {
     ok: new RegExp([
@@ -32,6 +32,18 @@ module.exports = function(output_element) {
     out.innerHTML +='<div class=ok>'+ txt +'</div>'
   }
   
+  function totalFail(txt) {
+    out.innerHTML +='<div class=total-fail>'+ txt +'</div>'
+  }
+
+  function totalOk(txt) {
+    out.innerHTML +='<div class=total-ok>'+ txt +'</div>'
+  }
+
+  function totalMsg(txt) {
+    out.innerHTML +='<div class=total-msg>'+ txt +'</div>'
+  }
+  
   
   return through(function(chunk, enc, cb) {
 
@@ -54,9 +66,9 @@ module.exports = function(output_element) {
       }
     }
     else if (line_msg) {
-      if (/^tests\s+[1-9]/gi.test(line_msg[1])) msg('total '+line_msg[1])
-      else if (/^pass\s+[1-9]/gi.test(line_msg[1])) ok(line_msg[1]);
-      else if (/^fail\s+[1-9]/gi.test(line_msg[1])) fail(line_msg[1]);
+      if (/^tests\s+[1-9]/gi.test(line_msg[1])) totalMsg('total ' + line_msg[1])
+      else if (/^pass\s+[1-9]/gi.test(line_msg[1])) totalOk(line_msg[1])
+      else if (/^fail\s+[1-9]/gi.test(line_msg[1])) totalFail(line_msg[1])
       else msg(line_msg[1])
     } 
     else if (line_plan) {
