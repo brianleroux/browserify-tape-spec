@@ -1,14 +1,16 @@
 {
   "name": "browserify-tape-spec",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Browser reporter for tape stream.",
   "main": "index.js",
   "scripts": {
     "test": "tape test/**.*",
-    "bundle":"browserify -r tape -r ./index.js:browserify-tape-spec > test/bundle.js"
+    "bundle": "browserify -r tape -r ./index.js:browserify-tape-spec > test/bundle.js"
   },
-  "browserify":{
-      "transform": [ "brfs" ]
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
   },
   "repository": {
     "type": "git",
