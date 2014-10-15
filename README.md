@@ -4,7 +4,7 @@ Spec style reporter for your tape test output in the browser.
 
 ## install
 
-    npm install tap-spec --save-dev
+    npm install browserify-tap-spec --save-dev
 
 ## usage
 
