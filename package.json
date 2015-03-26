@@ -4,7 +4,7 @@
   "description": "Browser reporter for tape stream.",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/**.*",
+    "test": "tape test/**.js",
     "bundle": "browserify -r tape -r ./index.js:browserify-tape-spec > test/bundle.js"
   },
   "browserify": {
