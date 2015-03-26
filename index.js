@@ -17,9 +17,12 @@ var re = {
 module.exports = function(output_element) {
 
   insertCss(css)
-    
-  var out = document.getElementById(output_element)  
-  
+
+  var out = document.getElementById(output_element)
+  // unclobber the css
+  out.classList.add('browserify-tape-spec-output');
+
+
   function msg(txt) {
     out.innerHTML +='<div class=msg>'+ txt +'</div>'
   }
@@ -31,7 +34,7 @@ module.exports = function(output_element) {
   function ok(txt) {
     out.innerHTML +='<div class=ok>'+ txt +'</div>'
   }
-  
+
   function totalFail(txt) {
     out.innerHTML +='<div class=total-fail>'+ txt +'</div>'
   }
@@ -43,21 +46,21 @@ module.exports = function(output_element) {
   function totalMsg(txt) {
     out.innerHTML +='<div class=total-msg>'+ txt +'</div>'
   }
-  
-  
+
+
   return through(function(chunk, enc, cb) {
 
     var line_ok = re.ok.exec(chunk)
       , line_msg = re.comment.exec(chunk)
       , line_plan = re.plan.exec(chunk)
- 
-  
+
+
     if (line_ok) {
       var is_ok = !line_ok[1];
       var num = line_ok[2] && Number(line_ok[2])
       var name = line_ok[3];
       var asrt = { ok:is_ok, number:num, name:name}
-      
+
       if (asrt.ok) {
         ok(asrt.name)
       }
@@ -70,7 +73,7 @@ module.exports = function(output_element) {
       else if (/^pass\s+[1-9]/gi.test(line_msg[1])) totalOk(line_msg[1])
       else if (/^fail\s+[1-9]/gi.test(line_msg[1])) totalFail(line_msg[1])
       else msg(line_msg[1])
-    } 
+    }
     else if (line_plan) {
         var start = Number(line_plan[1])
         var end = Number(line_plan[2])
