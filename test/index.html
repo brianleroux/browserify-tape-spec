@@ -14,6 +14,9 @@
 var test = require('tape')
   , report = require('browserify-tape-spec')
 
+/* put this before the tests to avoid logging to console entirely */
+test.createStream().pipe(report('out'))
+
 test('the first test case', function(t) {
   t.plan(1)
   t.ok('help', 'a good test')
@@ -26,7 +29,6 @@ test('second test is planning to fail', function(t) {
   t.end()
 })
 
-test.createStream().pipe(report('out'))
 </script>
 </body>
 </html>
