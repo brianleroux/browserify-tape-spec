@@ -46,7 +46,7 @@
     color:green;
 }
 
-body {
+.browserify-tape-spec-output {
   background:black;
   margin-left:20px;
   font-family: source-code-pro, sans-serif;
